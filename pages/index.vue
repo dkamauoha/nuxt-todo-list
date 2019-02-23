@@ -9,7 +9,7 @@
       </h2>
       <h2 class='subtitle' style='cursor: pointer; font-size: 2em;' v-if='!addNewTodo' @click='addNewTodo = true'>+New</h2>
       <div v-if='addNewTodo' class='todo-add'>
-        <b-form-input class='todo-add-input'  v-model='text'/>
+        <b-form-input class='todo-add-input'  v-model='text' @keyup.enter='newTodo'/>
         <b-btn variant='outline-secondary' class='todo-add-button' @click='newTodo'>Add</b-btn>
       </div>
       <div class='todo-container'>
@@ -97,7 +97,7 @@ export default {
   justify-content: center;
   align-items: flex-start;
   text-align: center;
-  background-image: linear-gradient(rgb(185, 185, 185), rgb(233, 233, 233));
+  background-image: linear-gradient(rgb(208, 234, 243), rgb(248, 242, 242));
 }
 
 .title {
@@ -152,7 +152,7 @@ export default {
   width: 15%;
   font-weight: 500;
   font-size: 18px;
-  border-radius: 0px 5px 5px 0px;
+  border-radius: 0px 6px 6px 0px;
 }
 .todo-todo {
   width: 100%;
