@@ -24,6 +24,10 @@ html {
   margin: 0;
 }
 
+.scrollbar {
+  background-color: white;
+}
+
 .button--green {
   display: inline-block;
   border-radius: 4px;

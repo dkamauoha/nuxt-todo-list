@@ -5,11 +5,12 @@
         Things To Do
       </h1>
       <h2 class="subtitle">
-        Todo List made with Nuxt.js
+        To do List made with Nuxt.js
       </h2>
-      <h2 class='subtitle' style='cursor: pointer;' v-if='!addNewTodo' @click='addNewTodo = true'>+</h2>
+      <h2 class='subtitle' style='cursor: pointer; font-size: 2em;' v-if='!addNewTodo' @click='addNewTodo = true'>+New</h2>
       <div v-if='addNewTodo' class='todo-add'>
-        <b-btn class='todo-add-button'></b-btn>
+        <b-form-input class='todo-add-input'  v-model='text'/>
+        <b-btn variant='outline-secondary' class='todo-add-button' @click='newTodo'>Add</b-btn>
       </div>
       <div class='todo-container'>
         <div v-for='todo in todos' :class='todo.completed ? "todo-todo completed":"todo-todo"'  :key='todo.id'>
@@ -33,6 +34,8 @@ export default {
   data: function () {
     return {
       addNewTodo: false,
+      id: 6,
+      text: '',
       todos: [
         {
           id: 1,
@@ -56,12 +59,7 @@ export default {
         },
         {
           id: 5,
-          item: 'Fold and put away laundry.',
-          completed: false,
-        },
-        {
-          id: 6,
-          item: 'Fold and put away laundry.',
+          item: 'Eat lunch.',
           completed: false,
         },
       ]
@@ -74,7 +72,15 @@ export default {
   },
   methods: {
     newTodo: function () {
-      this.addNewTodo
+      let item = {
+        id: this.id,
+        item: this.text,
+        completed: false
+      }
+      this.todos.push(item)
+      this.id++
+      this.text = ''
+      this.addNewTodo = false
     }
   }
 }
@@ -82,7 +88,10 @@ export default {
 
 <style>
 .container {
-  margin: 0 auto;
+  margin: 0px;
+  margin-right: 0px;
+  width: 100%;
+  max-width: 100% !important;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -109,16 +118,19 @@ export default {
   word-spacing: 5px;
   padding-bottom: 15px;
 }
-
+.scrollbar {
+  background-color: white;
+}
 .links {
   padding-top: 15px;
 }
 .todo-container {
   width: 100%;
+  height: 300px;
   background-color: white;
   box-shadow: 5px 5px 16px 3px rgba(0,0,0,0.61);
   border-radius: 5px;
-  overflow: hidden;
+  overflow: scroll;
   padding-top: 3px;
   margin-bottom: 3px;
   /* border: 1px solid lightgrey; */
@@ -132,14 +144,15 @@ export default {
   border-radius: 5px;
   overflow: hidden;
 }
-.todo-add-symbol {
-  width: 10%;
+.todo-add-input {
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2em;
-  background-color: lightgrey;
+  border-radius: 5px 0px 0px 5px;
+}
+.todo-add-button {
+  width: 15%;
+  font-weight: 500;
+  font-size: 18px;
+  border-radius: 0px 5px 5px 0px;
 }
 .todo-todo {
   width: 100%;
